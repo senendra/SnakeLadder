@@ -6,7 +6,9 @@ namespace SnakeLadderProgam
         static void Main(string[] args)
         {
             int playerPosition = 0;
-            Console.WriteLine("Player position :" + playerPosition);
+            Random random = new Random();
+            int dieValue = random.Next(1, 7);
+            Console.WriteLine("Player position :" + playerPosition + " and Die Rolls gives :" + dieValue);
         }
     }
 }
