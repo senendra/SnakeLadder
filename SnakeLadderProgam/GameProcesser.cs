@@ -10,10 +10,6 @@ namespace SnakeLadderProgam
         public const int SNAKE_BITE = 2;
         public const int MAX_POSITION = 100;
         Random random = new Random();
-        public void Ladder()
-        {
-            
-        }
         public void gameProcesser()
         {
             int playerPosition = 0;
@@ -54,7 +50,6 @@ namespace SnakeLadderProgam
                 }
                 Console.WriteLine("Player position after rolling Die :" + playerPosition);
                 Console.WriteLine("--------------------------------------------");
-
             }
         }
     }
