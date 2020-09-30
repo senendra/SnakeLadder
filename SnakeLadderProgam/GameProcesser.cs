@@ -10,10 +10,11 @@ namespace SnakeLadderProgam
         public const int SNAKE_BITE = 2;
         public const int MAX_POSITION = 100;
         Random random = new Random();
-        public void gameProcesser()
+        public int gameProcesser()
         {
             int playerPosition = 0;
-            for (int count = 0; playerPosition < MAX_POSITION; count++)
+            int count;
+            for ( count = 0; playerPosition < MAX_POSITION; count++)
             {
                 int dieValue = random.Next(1, 7);
                 Console.WriteLine("Player position :" + playerPosition + " and Die Rolls gives :" + dieValue);
@@ -51,6 +52,7 @@ namespace SnakeLadderProgam
                 Console.WriteLine("Player position after rolling Die :" + playerPosition);
                 Console.WriteLine("--------------------------------------------");
             }
+            return count;
         }
     }
 }

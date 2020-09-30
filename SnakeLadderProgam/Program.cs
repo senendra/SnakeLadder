@@ -6,7 +6,8 @@ namespace SnakeLadderProgam
         static void Main(string[] args)
         {
             GameProcesser Player = new GameProcesser();
-            Player.gameProcesser();
+            int playerCount = Player.gameProcesser();
+            Console.WriteLine("Number of times the die role to win is : " +playerCount);
         }
     }
 }
