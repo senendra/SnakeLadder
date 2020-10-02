@@ -5,54 +5,63 @@ namespace SnakeLadderProgam
 {
     class GameProcesser
     {
-        public const int NO_CHANGE = 0;
+        public const int NOCHANGE = 0;
         public const int LADDER = 1;
-        public const int SNAKE_BITE = 2;
-        public const int MAX_POSITION = 100;
+        public const int SNAKEBITE = 2;
+        public const int STARTPOSITION = 0;
+        public const int WINNINGPOSITION = 100;
         Random random = new Random();
-        public int gameProcesser()
+        public int currentPosition = STARTPOSITION;
+        public int nextPosition;
+        public int dieRoll()
         {
-            int playerPosition = 0;
-            int count;
-            for ( count = 0; playerPosition < MAX_POSITION; count++)
+            int dieValue = random.Next(1, 7);
+            return dieValue;
+        }
+        public int positionChecker( int dieValue)
+        {
+            int check = random.Next(0, 3);
+            int stepValue = 0;
+            switch (check)
             {
-                int dieValue = random.Next(1, 7);
-                Console.WriteLine("Player position :" + playerPosition + " and Die Rolls gives :" + dieValue);
-                int check = random.Next(0, 3);
-                switch (check)
-                {
-                    case NO_CHANGE:
-                        Console.WriteLine("No Change ");
-                        break;
-                    case LADDER:
-                        if (playerPosition + dieValue > 100)
-                        {
-                            Console.WriteLine("Ladder But Exceed 100");
-                            break;
-                        }
-                        else
-                        {
-                            playerPosition = playerPosition + dieValue;
-                            Console.WriteLine("Ladder");
-                            break;
-                        }
-                    case SNAKE_BITE:
-                        if ((playerPosition - dieValue) < 0)
-                        {
-                            playerPosition = 0;
-                            break;
-                        }
-                        else
-                        {
-                            playerPosition = playerPosition - dieValue;
-                            Console.WriteLine("Snake Bite");
-                            break;
-                        }
-                }
-                Console.WriteLine("Player position after rolling Die :" + playerPosition);
-                Console.WriteLine("--------------------------------------------");
+                case NOCHANGE:
+                    break;
+                case LADDER:
+                    stepValue = dieValue;
+                    break;
+                case SNAKEBITE:
+                    stepValue = -dieValue;
+                    break;
             }
-            return count;
+            return stepValue;
+        }
+        public void gameProcesser()
+        {
+            int dieValue = dieRoll();
+            int stepValue = positionChecker(dieValue);
+            //Replay for getting Ladder
+            if(stepValue > 0)
+            {
+                this.gameProcesser();
+            }
+            //check for player exceeds winning position
+            if( currentPosition + stepValue > WINNINGPOSITION)
+            {
+                nextPosition = currentPosition;
+            }
+            else
+            {
+                nextPosition = currentPosition + stepValue;
+            }
+            //check for getting lower position than starting position
+            if(nextPosition < STARTPOSITION )
+            {
+                currentPosition = STARTPOSITION;
+            }
+            else
+            {
+                 currentPosition = nextPosition;
+            }
         }
     }
 }
